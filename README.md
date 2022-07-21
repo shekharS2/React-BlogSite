@@ -1,4 +1,4 @@
-Please find screenshots of outputs in the folder -->> screenshots-of-output
+Please find screenshots of outputs in the folder --> "screenshots-of-output"
 
 Features implemented:
     1) Display blog post contents as Cards on front page.
