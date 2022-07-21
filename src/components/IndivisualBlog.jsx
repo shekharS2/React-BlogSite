@@ -8,18 +8,6 @@ function IndivisualBlog() {
     const [comments, updateComments] = useState();
 
     useEffect(() => {
-        const fetchComments = async () => {    
-            const res = await axios.get(
-              `https://jsonplaceholder.typicode.com/comments`,
-            );  
-        
-            updateComments(res.data);
-          }
-    
-          fetchComments();
-    }, [postId]);
-
-    useEffect(() => {
         const fetchPost = async () => {    
             const res = await axios.get(
               `https://jsonplaceholder.typicode.com/posts/${postId}`,
@@ -29,6 +17,24 @@ function IndivisualBlog() {
           }
     
           fetchPost();
+    }, [postId]);
+
+    useEffect(() => {
+        const fetchComments = async () => {    
+            const res = await axios.get(
+              `https://jsonplaceholder.typicode.com/comments`,
+            );  
+
+            let postComments = res.data.filter((comment) =>  {                
+                return parseInt(postId) === comment.postId;
+            });
+
+            console.log(postComments);
+        
+            updateComments(postComments);
+          }
+    
+          fetchComments();
     }, [postId]);
 
     if(!post) {
@@ -50,15 +56,12 @@ function IndivisualBlog() {
             <div>
                 <h2>Comments</h2>
                 {comments && comments.map((comment) => {
-                    if(postId === comment.postId) {
-                        return <div>
-                            <h3>Name: {comment.name}</h3>
-                            <h3>Email: {comment.email}</h3>
-                            <h3>Comment: {comment.body}</h3>
-                        </div>
-                    }else {
-                        return null;
-                    }
+                    console.log(comment)
+                    return <div>
+                        <h6>Name: {comment.name}</h6>
+                        <p>Email: {comment.email}</p>
+                        <p>Comment: {comment.body}</p>
+                    </div>
                 })}
             </div>
         </div>
