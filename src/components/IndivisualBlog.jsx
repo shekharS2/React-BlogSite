@@ -13,7 +13,7 @@ function IndivisualBlog() {
               `https://jsonplaceholder.typicode.com/comments`,
             );  
         
-            updatePost(res.data);
+            updateComments(res.data);
           }
     
           fetchComments();
@@ -25,7 +25,7 @@ function IndivisualBlog() {
               `https://jsonplaceholder.typicode.com/posts/${postId}`,
             );  
         
-            updateComments(res.data);
+            updatePost(res.data);
           }
     
           fetchPost();
@@ -39,6 +39,8 @@ function IndivisualBlog() {
         return null;
     }
 
+    console.log(comments);
+
     return (
         <div>
             <h1>Post</h1>
@@ -51,8 +53,8 @@ function IndivisualBlog() {
                     if(postId === comment.postId) {
                         return <div>
                             <h3>Name: {comment.name}</h3>
-                            <h3>Name: {comment.email}</h3>
-                            <h3>Name: {comment.body}</h3>
+                            <h3>Email: {comment.email}</h3>
+                            <h3>Comment: {comment.body}</h3>
                         </div>
                     }else {
                         return null;
